@@ -1,9 +1,14 @@
-const connectDB = require('./config/db')
+const connectDB = require("./config/db");
 
-connectDB()
+process.on('uncaughtException', (err) => {
+  console.log('Uncaught Exception shutting down.....');
+  console.log(`${err.name} = ${err.message}`);
+  process.exit(1);
+});
 
-const app = require('./app');
+connectDB();
 
+const app = require("./app");
 
 const port = process.env.PORT || 3000;
 
